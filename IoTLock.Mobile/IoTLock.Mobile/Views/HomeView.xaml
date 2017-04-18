@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IoTLock.Mobile.Views.HomeView"
+             Title="Home">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Adicionar" Order="Primary"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <Label
+            Margin="10"
+            Text="Smart House"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            FontSize="Large"
+            FontAttributes="Bold"/>
+        <TableView Margin="10">
+            <TableRoot>
+                <TableSection Title="Luzes">
+                    <SwitchCell Text="Sala" OnChanged="SwitchCell_OnChanged"/>
+                    <SwitchCell Text="Cozinha"/>
+                    <SwitchCell Text="Quarto"/>
+                    <SwitchCell Text="Garagem"/>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </StackLayout>
+</ContentPage>
