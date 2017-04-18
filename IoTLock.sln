@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTLock.IoT", "IoTLock.IoT\IoTLock.IoT.csproj", "{153F9638-718D-456A-AA76-9B9F2B0F5139}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|ARM.ActiveCfg = Debug|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|ARM.Build.0 = Debug|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|ARM.Deploy.0 = Debug|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|x64.ActiveCfg = Debug|x64
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|x64.Build.0 = Debug|x64
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|x64.Deploy.0 = Debug|x64
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|x86.ActiveCfg = Debug|x86
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|x86.Build.0 = Debug|x86
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|x86.Deploy.0 = Debug|x86
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|ARM.ActiveCfg = Release|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|ARM.Build.0 = Release|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|ARM.Deploy.0 = Release|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|x64.ActiveCfg = Release|x64
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|x64.Build.0 = Release|x64
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|x64.Deploy.0 = Release|x64
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|x86.ActiveCfg = Release|x86
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|x86.Build.0 = Release|x86
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
