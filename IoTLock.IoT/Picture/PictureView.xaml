@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="IoTLock.IoT.Picture.PictureView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:IoTLock.IoT.Picture"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <TextBlock x:Name="statusLabel" HorizontalAlignment="Center" />
+            <Canvas Name="PreviewCanvas" Background="Gray" Height="Auto" Width="Auto" Visibility="Visible">
+                <CaptureElement x:Name="previewElement" Height="Auto" Width="Auto" HorizontalAlignment="Center" Visibility="Visible" />
+            </Canvas>
+            <Canvas Name="PhotoCanvas" Grid.Row="1" Grid.Column="1" Width="200" Height="200" Background="Gray"  Margin="20,0,0,0" Visibility="Visible">
+                <Image x:Name="captureImage" Width="200" Height="200" Visibility="Visible"/>
+            </Canvas>
+        </StackPanel>
+    </Grid>
+</Page>
