@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IoTLock.IoT.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace IoTLock.IoT.Picture
     public sealed partial class PictureView : Page
     {
         private readonly string PHOTO_FILE_NAME = "photo.jpg";
+        private readonly string COGNITIVE_KEY = "a056eb1bd9cd4e2b9371c0a250af53cd";
 
         private const int BUTTON_PIN = 5;
         private GpioPin buttonPin;
@@ -135,12 +137,17 @@ namespace IoTLock.IoT.Picture
                     Windows.UI.Core.CoreDispatcherPriority.Normal,
                     async () =>
                     {
-                        await TakePicture();
+                        var name = await CheckAuthorization();
+
+                        if (name != null)
+                        {
+                            statusLabel.Text = name;
+                        }
                     });
             }
         }
 
-        private async Task TakePicture()
+        private async Task<StorageFile> TakePicture()
         {
             try
             {
@@ -154,10 +161,10 @@ namespace IoTLock.IoT.Picture
                         statusLabel.Text = "Photo taken";
                     });
 
-                IRandomAccessStream photoStream = await photoFile.OpenReadAsync();
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.SetSource(photoStream);
-                captureImage.Source = bitmap;
+                return photoFile;
+                //IRandomAccessStream photoStream = await photoFile.OpenReadAsync();
+                //BitmapImage bitmap = new BitmapImage();
+                //bitmap.SetSource(photoStream);
             }
             catch (Exception ex)
             {
@@ -166,6 +173,55 @@ namespace IoTLock.IoT.Picture
                     {
                         statusLabel.Text = ex.Message;
                     });
+                return null;
+            }
+        }
+
+        private async Task<string> CheckAuthorization()
+        {
+            try
+            {
+                FaceServiceHelper.ApiKey = COGNITIVE_KEY;
+
+                var picture = await TakePicture();
+
+                var personsGroups = await FaceServiceHelper.GetPersonGroupsAsync();
+                if (personsGroups == null)
+                    return null;
+
+                var gabGroup = personsGroups.FirstOrDefault(p => p.PersonGroupId == "2");
+
+                var results = await FaceServiceHelper.DetectAsync(delegate { return picture.OpenStreamForReadAsync(); },
+                    returnFaceId: true);
+                if (results.Count() > 0)
+                {
+                    var faceId = results.FirstOrDefault().FaceId;
+                    var identityResult = await FaceServiceHelper.IdentifyAsync("2", new Guid[] { faceId });
+
+                    var personId = identityResult.FirstOrDefault().Candidates
+                        .OrderBy(p => p.Confidence)
+                        .FirstOrDefault()
+                        .PersonId;
+
+                    var personsInGabGroup = await FaceServiceHelper.GetPersonsAsync("2");
+                    var authorized = personsInGabGroup.Any(p => p.PersonId == personId);
+
+                    if (authorized)
+                    {
+                        var person = personsInGabGroup.FirstOrDefault(p => p.PersonId == personId);
+                        return person.Name;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        statusLabel.Text = ex.Message;
+                    });
+                return null;
             }
         }
     }

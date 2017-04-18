@@ -97,6 +97,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BindableBase.cs" />
+    <Compile Include="Helpers\ErrorTrackingHelper.cs" />
+    <Compile Include="Helpers\FaceServiceHelper.cs" />
     <Compile Include="Picture\PictureView.xaml.cs">
       <DependentUpon>PictureView.xaml</DependentUpon>
     </Compile>

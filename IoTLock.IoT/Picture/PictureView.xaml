@@ -22,9 +22,6 @@
             <Canvas Name="PreviewCanvas" Background="Gray" Height="Auto" Width="Auto" Visibility="Visible">
                 <CaptureElement x:Name="previewElement" Height="Auto" Width="Auto" HorizontalAlignment="Center" Visibility="Visible" />
             </Canvas>
-            <Canvas Name="PhotoCanvas" Grid.Row="1" Grid.Column="1" Width="200" Height="200" Background="Gray"  Margin="20,0,0,0" Visibility="Visible">
-                <Image x:Name="captureImage" Width="200" Height="200" Visibility="Visible"/>
-            </Canvas>
         </StackPanel>
     </Grid>
 </Page>
