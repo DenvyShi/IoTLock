@@ -4,7 +4,9 @@
              x:Class="IoTLock.Mobile.Views.HomeView"
              Title="Home">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Adicionar" Order="Primary"/>
+        <ToolbarItem Text="Adicionar Grupo" Order="Secondary"/>
+        <ToolbarItem Text="Adicionar Pessoa" Order="Secondary"/>
+        <ToolbarItem Text="Adicionar Rosto" Order="Secondary"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
         <Label

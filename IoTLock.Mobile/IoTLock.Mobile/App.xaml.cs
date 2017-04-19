@@ -13,7 +13,7 @@ namespace IoTLock.Mobile
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Views.HomeView());
+            MainPage = new NavigationPage(new Views.CadastroView());
         }
 
         protected override void OnStart()
