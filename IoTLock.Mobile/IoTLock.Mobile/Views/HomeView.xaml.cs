@@ -15,6 +15,7 @@ namespace IoTLock.Mobile.Views
         public HomeView()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private void SwitchCell_OnChanged(object sender, ToggledEventArgs e)

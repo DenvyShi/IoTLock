@@ -12,8 +12,8 @@ namespace IoTLock.Mobile
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new Views.CadastroView());
+            DependencyService.Register<Services.IMvvmService, Services.MvvmService>();
+            MainPage = new NavigationPage(new Views.StartView());
         }
 
         protected override void OnStart()
