@@ -5,34 +5,37 @@
     <ScrollView>
         <StackLayout VerticalOptions="Center">
             <Label 
-            Text="{Binding Text}" 
-            FontSize="Large"
-            FontAttributes="Bold"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+                Text="{Binding Text}" 
+                FontSize="Large"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
             <Label 
-            Text="{Binding StatusResult}" 
-            FontSize="Medium"
-            TextColor="{Binding TextColor}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+                Text="{Binding StatusResult}" 
+                FontSize="Medium"
+                TextColor="{Binding TextColor}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
             <Image 
-            HeightRequest="300"
-            WidthRequest="300"
-            HorizontalOptions="Center"
-            VerticalOptions="Center"
-            Source="{Binding ImageUrl}"/>
+                HeightRequest="300"
+                WidthRequest="300"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Source="{Binding ImageUrl}"/>
+            <ActivityIndicator
+                IsVisible="{Binding IsRunning}"
+                IsRunning="{Binding IsRunning}"/>
             <Button 
-            Margin="5"
-            Text="Verificar Rosto"
-            WidthRequest="400"
-            Command="{Binding CheckFaceCommand}"/>
+                Margin="5"
+                Text="Verificar Rosto"
+                WidthRequest="400"
+                Command="{Binding CheckFaceCommand}"/>
             <Button 
-            Margin="5"
-            WidthRequest="400"
-            Text="Entrar"
-            Command="{Binding FaceConfirmerdCommand}"
-            IsEnabled="{Binding IsChecked}"/>
+                Margin="5"
+                WidthRequest="400"
+                Text="Entrar"
+                Command="{Binding FaceConfirmerdCommand}"
+                IsEnabled="{Binding IsChecked}"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

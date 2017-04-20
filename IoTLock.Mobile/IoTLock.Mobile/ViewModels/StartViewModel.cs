@@ -43,9 +43,17 @@ namespace IoTLock.Mobile.ViewModels
             set { _isChecked = value; OnPropertyChanged(); }
         }
 
+        private bool _isRunning;
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+            set { _isRunning = value; OnPropertyChanged(); }
+        }
+
+
+
         //Services
         private readonly Services.IMvvmService _mvvmService;
-        private MediaFile _image;
 
         //Commands
         public Command CheckFaceCommand { get; set; }
@@ -69,6 +77,7 @@ namespace IoTLock.Mobile.ViewModels
 
         private async void ExecuteCheckFaceCommand()
         {
+            IsRunning = true;
             await CrossMedia.Current.Initialize();
             var mediaFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions());
             ImageUrl = mediaFile?.Path;
@@ -95,12 +104,16 @@ namespace IoTLock.Mobile.ViewModels
                     StatusResult = "Rosto Não Cadastrado";
                     TextColor = Color.Red;
                     IsChecked = false;
-                }
+                }                
             }
             catch (Exception ex)
             {
                 await _mvvmService.MessageMvvm("Error", ex.Message, "ok");
-            }           
+            }
+            finally
+            {
+                IsRunning = false;
+            }
         }
     }
 }

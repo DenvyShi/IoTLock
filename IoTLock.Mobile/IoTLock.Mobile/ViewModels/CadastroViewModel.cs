@@ -74,6 +74,12 @@ namespace IoTLock.Mobile.ViewModels
             set { _selectedPerson = value; OnPropertyChanged(); }
         }
 
+        private bool _isRunning;
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+            set { _isRunning = value; OnPropertyChanged(); }
+        }
 
 
 
@@ -104,6 +110,7 @@ namespace IoTLock.Mobile.ViewModels
         {
             try
             {
+                IsRunning = true;
                 var result = await FaceServiceHelper.DetectAsync(GetStream, true);
                 if (result == null || result.Count() == 0)
                     return;
@@ -114,6 +121,10 @@ namespace IoTLock.Mobile.ViewModels
                 await _mvvmService.MessageMvvm("Mensagem", "Rosto cadastrado com sucesso", "Ok");
             }
             catch (Exception ex) { }
+            finally
+            {
+                IsRunning = false;
+            }
         }
 
         private async void ExecuteCadastrarPessoaCommand()

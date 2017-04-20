@@ -58,6 +58,9 @@
                 <Image Source="{Binding ImageUrl}"
                        HeightRequest="200"
                        BackgroundColor="Azure"/>
+                <ActivityIndicator
+                    IsVisible="{Binding IsRunning}"
+                    IsRunning="{Binding IsRunning}"/>
                 <Button Text="Cadastrar rosto" Command="{Binding TakePictureCommand}"/>
                 <Button Text="Confirmar" Command="{Binding ConfirmedCommand}"/>
             </StackLayout>
