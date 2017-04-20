@@ -1,6 +1,11 @@
 ﻿using System;
+using IoTLock.Mobile.Helpers;
 using Plugin.Media;
 using Xamarin.Forms;
+using Plugin.Media.Abstractions;
+using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
 
 namespace IoTLock.Mobile.ViewModels
 {
@@ -31,9 +36,16 @@ namespace IoTLock.Mobile.ViewModels
             get { return _textColor; }
             set { _textColor = value; OnPropertyChanged(); }
         }
+        private bool _isChecked;
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set { _isChecked = value; OnPropertyChanged(); }
+        }
 
         //Services
         private readonly Services.IMvvmService _mvvmService;
+        private MediaFile _image;
 
         //Commands
         public Command CheckFaceCommand { get; set; }
@@ -42,6 +54,7 @@ namespace IoTLock.Mobile.ViewModels
         //Construtor
         public StartViewModel()
         {
+            FaceServiceHelper.ApiKey = "a056eb1bd9cd4e2b9371c0a250af53cd";
             Text = "Welcome";
             StatusResult = string.Empty;
             _mvvmService = DependencyService.Get<Services.IMvvmService>();
@@ -59,9 +72,35 @@ namespace IoTLock.Mobile.ViewModels
             await CrossMedia.Current.Initialize();
             var mediaFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions());
             ImageUrl = mediaFile?.Path;
-            StatusResult = "Rosto cadastrado";
-            TextColor = Color.Green;
-            Text = "Jonathan Braga";            
+
+            try
+            {
+                var func = new Func<Task<Stream>>(() => Task.Factory.StartNew<Stream>(() => mediaFile.GetStream()));
+                var result = await FaceServiceHelper.DetectAsync(func, true, false, null);
+                var resultIdentify = await FaceServiceHelper.IdentifyAsync("2", result.Select(p => p.FaceId).ToArray());
+                if (resultIdentify.Any())
+                {
+                    var candidate = resultIdentify.FirstOrDefault().Candidates
+                        .OrderBy(p => p.Confidence)
+                        .FirstOrDefault();
+                    StatusResult = "Rosto Cadastrado";
+                    TextColor = Color.Green;
+
+                    var person = await FaceServiceHelper.GetPersonAsync("2", candidate.PersonId);
+                    Text = person.Name;
+                    IsChecked = true;
+                }
+                else
+                {
+                    StatusResult = "Rosto Não Cadastrado";
+                    TextColor = Color.Red;
+                    IsChecked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _mvvmService.MessageMvvm("Error", ex.Message, "ok");
+            }           
         }
     }
 }

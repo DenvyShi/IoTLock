@@ -12,6 +12,8 @@ namespace IoTLock.Mobile.Views
         {
             InitializeComponent();
             BindingContext = new CadastroViewModel();
+            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }

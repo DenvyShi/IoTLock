@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IoTLock.Mobile.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,9 @@ namespace IoTLock.Mobile.Views
         public HomeView()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
             NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = new HomeViewModel();
         }
 
         private void SwitchCell_OnChanged(object sender, ToggledEventArgs e)

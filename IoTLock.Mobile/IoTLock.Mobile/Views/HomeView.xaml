@@ -3,11 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IoTLock.Mobile.Views.HomeView"
              Title="Home">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Adicionar Grupo" Order="Secondary"/>
-        <ToolbarItem Text="Adicionar Pessoa" Order="Secondary"/>
-        <ToolbarItem Text="Adicionar Rosto" Order="Secondary"/>
-    </ContentPage.ToolbarItems>
     <StackLayout>
         <Label
             Margin="10"
@@ -26,5 +21,8 @@
                 </TableSection>
             </TableRoot>
         </TableView>
+        <Button 
+            Text="Configurações" 
+            Command="{Binding ConfigCommand}"/>
     </StackLayout>
 </ContentPage>

@@ -5,89 +5,61 @@
     <TabbedPage.Children>
         <ContentPage Title="Grupo">
             <StackLayout VerticalOptions="Center">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="Nome do Grupo"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-                    <Entry 
-                        Grid.Row="1"
-                        Grid.Column="1"/>
-                    <Button
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Margin="0,15,0,0"
-                        Text="Cadastrar"/>
-                </Grid>
+                <Label
+                    Text="Nome do Grupo"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Entry Text="{Binding TextoGrupo}"/>
+                <Button
+                    Margin="0,15,0,0"
+                    Text="Cadastrar"
+                    Command="{Binding GrupoCommand}"/>
             </StackLayout>
         </ContentPage>
         <ContentPage Title="Pessoa">
             <StackLayout Padding="15" VerticalOptions="Center">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Text="Nome da Pessoa"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-                    <Entry 
-                        Grid.Row="1"
-                        Grid.Column="1"/>
-
-                    <Label
-                        Grid.Row="2"
-                        Grid.Column="1"
-                        Text="Grupo"
-                        FontSize="Medium"
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-                    <Picker
-                        Grid.Row="3"
-                        Grid.Column="1"/>
-                    <Button
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        Margin="0,15,0,0"
-                        Text="Cadastrar"/>
-                </Grid>
+                <Label
+                    Text="Nome da Pessoa"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Entry
+                    Text="{Binding TextoPessoa}"/>
+                <Label
+                    Text="Grupo"
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Picker
+                    ItemsSource="{Binding Grupos}"
+                    SelectedItem="{Binding SelectedGroup}">
+                </Picker>
+                <Button
+                    Margin="0,15,0,0"
+                    Text="Cadastrar"
+                    Command="{Binding CadastrarPessoaCommand}"/>
             </StackLayout>
         </ContentPage>
         <ContentPage Title="Rosto">
             <StackLayout VerticalOptions="Center">
+                <Label
+                    Text="Pessoa" 
+                    FontSize="Medium"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                <Picker
+                    ItemsSource="{Binding People}"
+                    SelectedItem="{Binding SelectedPerson}"/>
                 <Image Source="{Binding ImageUrl}"
                        HeightRequest="200"
                        BackgroundColor="Azure"/>
                 <Button Text="Cadastrar rosto" Command="{Binding TakePictureCommand}"/>
+                <Button Text="Confirmar" Command="{Binding ConfirmedCommand}"/>
             </StackLayout>
         </ContentPage>
     </TabbedPage.Children>
