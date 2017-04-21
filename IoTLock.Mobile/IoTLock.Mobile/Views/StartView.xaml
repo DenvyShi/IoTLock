@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IoTLock.Mobile.Views.StartView"
+             BackgroundColor="White">
+    <ScrollView>
+        <StackLayout VerticalOptions="Center">
+            <Label 
+                Text="{Binding Text}" 
+                FontSize="Large"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+            <Label 
+                Text="{Binding StatusResult}" 
+                FontSize="Medium"
+                TextColor="{Binding TextColor}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"/>
+            <Image 
+                HeightRequest="300"
+                WidthRequest="300"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Source="{Binding ImageUrl}"/>
+            <ActivityIndicator
+                IsVisible="{Binding IsRunning}"
+                IsRunning="{Binding IsRunning}"/>
+            <Button 
+                TextColor="White"
+                BackgroundColor="#2A5769"
+                Margin="5"
+                Text="Verificar Rosto"
+                WidthRequest="400"
+                Command="{Binding CheckFaceCommand}"/>
+            <Button
+                TextColor="White"
+                BackgroundColor="#2A5769"
+                Margin="5"
+                WidthRequest="400"
+                Text="Entrar"
+                Command="{Binding FaceConfirmerdCommand}"
+                IsEnabled="{Binding IsChecked}"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
