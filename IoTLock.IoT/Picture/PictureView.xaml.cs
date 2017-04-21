@@ -1,4 +1,5 @@
 ﻿using IoTLock.IoT.Helpers;
+using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -36,6 +37,13 @@ namespace IoTLock.IoT.Picture
         private const int BUTTON_PIN = 5;
         private GpioPin buttonPin;
 
+        private const int HALL_LED = 26;
+        private const int HALLWAY_LED = 19;
+        private const int KITCHEN_LED = 13;
+        private const int GARDEN_LED = 6;
+        private const int BEDROOM_LED = 11;
+        private GpioPin hallPin, hallwayPin, kitchenPin, gardenPin, bedroomPin;
+
         private MediaCapture mediaCapture;
         private StorageFile photoFile;
 
@@ -45,6 +53,37 @@ namespace IoTLock.IoT.Picture
             InitializeVideo();
             InitializeGPIO();
 
+            // SignalR connection
+            var hubConnection = new HubConnection("http://iotlock-api.azurewebsites.net");
+            IHubProxy lightingHubProxy = hubConnection.CreateHubProxy("LightingHub");
+            lightingHubProxy.On<string>("toggle", room =>
+            {
+                GpioPinValue value;
+                switch (room)
+                {
+                    case "hallway":
+                        value = hallwayPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        hallwayPin.Write(value);
+                        hallwayPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                    case "kitchen":
+                        value = kitchenPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        kitchenPin.Write(value);
+                        kitchenPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                    case "garden":
+                        value = gardenPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        gardenPin.Write(value);
+                        gardenPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                    case "bedroom":
+                        value = bedroomPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        bedroomPin.Write(value);
+                        bedroomPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                }
+            });
+            hubConnection.Start();
         }
 
         private async void InitializeVideo()
@@ -111,6 +150,52 @@ namespace IoTLock.IoT.Picture
                 return;
             }
 
+            #region Hall Pin
+            this.hallPin = gpio.OpenPin(HALL_LED);
+            if (this.hallPin == null)
+            {
+                statusLabel.Text = "Could not initialize hall pin";
+                return;
+            }
+            #endregion
+
+            #region Hallway Pin
+            this.hallwayPin = gpio.OpenPin(HALLWAY_LED);
+            if (this.hallwayPin == null)
+            {
+                statusLabel.Text = "Could not initialize hallway pin";
+                return;
+            }
+            #endregion
+
+            #region Kitchen Pin
+            this.kitchenPin = gpio.OpenPin(KITCHEN_LED);
+            if (this.kitchenPin == null)
+            {
+                statusLabel.Text = "Could not initialize kitchen pin";
+                return;
+            }
+            #endregion
+
+            #region Garden Pin
+            this.gardenPin = gpio.OpenPin(GARDEN_LED);
+            if (this.gardenPin == null)
+            {
+                statusLabel.Text = "Could not initialize garden pin";
+                return;
+            }
+            #endregion
+
+            #region Bedroom Pin
+            this.bedroomPin = gpio.OpenPin(BEDROOM_LED);
+            if (this.bedroomPin == null)
+            {
+                statusLabel.Text = "Could not initialize bedroom pin";
+                return;
+            }
+            #endregion
+
+            #region Button Pin
             buttonPin = gpio.OpenPin(BUTTON_PIN);
 
             // Check if input pull-up resistors are supported
@@ -125,6 +210,7 @@ namespace IoTLock.IoT.Picture
             // Register for the ValueChanged event so our buttonPin_ValueChanged 
             // function is called when the button is pressed
             buttonPin.ValueChanged += ButtonPin_ValueChanged; ;
+            #endregion
 
             statusLabel.Text = "GPIO pins initialized correctly.";
         }
@@ -209,6 +295,8 @@ namespace IoTLock.IoT.Picture
                     if (authorized)
                     {
                         var person = personsInGabGroup.FirstOrDefault(p => p.PersonId == personId);
+                        hallPin.Write(GpioPinValue.High);
+                        hallPin.SetDriveMode(GpioPinDriveMode.Output);
                         return person.Name;
                     }
                 }

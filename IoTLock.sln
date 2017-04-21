@@ -1,4 +1,3 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.0
@@ -29,6 +28,10 @@ Global
 		AppStore|iPhoneSimulator = AppStore|iPhoneSimulator
 		AppStore|x64 = AppStore|x64
 		AppStore|x86 = AppStore|x86
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IotLock.API", "IotLock.API\IotLock.API.csproj", "{9247E902-172F-4DB3-BD43-D556FB8AA31B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|iPhone = Debug|iPhone
@@ -80,6 +83,9 @@ Global
 		{153F9638-718D-456A-AA76-9B9F2B0F5139}.AppStore|x86.Build.0 = Release|x86
 		{153F9638-718D-456A-AA76-9B9F2B0F5139}.AppStore|x86.Deploy.0 = Release|x86
 		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|Any CPU.ActiveCfg = Debug|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|Any CPU.Build.0 = Debug|ARM
+		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|Any CPU.Deploy.0 = Debug|ARM
 		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|ARM.ActiveCfg = Debug|ARM
 		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|ARM.Build.0 = Debug|ARM
 		{153F9638-718D-456A-AA76-9B9F2B0F5139}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -315,6 +321,22 @@ Global
 		{E7958748-760E-4C90-9DAC-66D7CC5ACD76}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{E7958748-760E-4C90-9DAC-66D7CC5ACD76}.Release|x64.ActiveCfg = Release|iPhone
 		{E7958748-760E-4C90-9DAC-66D7CC5ACD76}.Release|x86.ActiveCfg = Release|iPhone
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|x64.Build.0 = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Debug|x86.Build.0 = Debug|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|ARM.Build.0 = Release|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|x64.ActiveCfg = Release|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|x64.Build.0 = Release|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|x86.ActiveCfg = Release|Any CPU
+		{9247E902-172F-4DB3-BD43-D556FB8AA31B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
