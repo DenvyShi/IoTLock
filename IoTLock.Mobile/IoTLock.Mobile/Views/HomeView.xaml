@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IoTLock.Mobile.Views.HomeView"
-             Title="Home">
+             Title="Home"
+             BackgroundColor="White">
     <StackLayout>
         <Label
             Margin="10"
             Text="Smart House"
+            TextColor="#2A5769"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             FontSize="Large"
@@ -14,15 +16,26 @@
         <TableView Margin="10">
             <TableRoot>
                 <TableSection Title="Luzes">
-                    <SwitchCell Text="Sala" OnChanged="SwitchCell_OnChanged"/>
-                    <SwitchCell Text="Cozinha"/>
-                    <SwitchCell Text="Quarto"/>
-                    <SwitchCell Text="Garagem"/>
+                    <SwitchCell 
+                        Text="Corredor" 
+                        OnChanged="Corredor_Changed"/>
+                    <SwitchCell 
+                        Text="Cozinha"
+                        OnChanged="Cozinha_Changed"/>
+                    <SwitchCell 
+                        Text="Jardim"
+                        OnChanged="Jardim_Changed"/>
+                    <SwitchCell 
+                        Text="Quarto"
+                        OnChanged="Quarto_Changed"/>
                 </TableSection>
             </TableRoot>
         </TableView>
         <Button 
-            Text="Configurações" 
+            Margin="15"
+            Text="Configurações"
+            TextColor="White"
+            BackgroundColor="#2A5769"
             Command="{Binding ConfigCommand}"/>
     </StackLayout>
 </ContentPage>
