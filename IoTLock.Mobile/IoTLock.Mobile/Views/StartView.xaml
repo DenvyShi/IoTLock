@@ -28,14 +28,14 @@
                 IsRunning="{Binding IsRunning}"/>
             <Button 
                 TextColor="White"
-                BackgroundColor="#2A5769"
+                BackgroundColor="#9b4b9d"
                 Margin="5"
                 Text="Verificar Rosto"
                 WidthRequest="400"
                 Command="{Binding CheckFaceCommand}"/>
             <Button
                 TextColor="White"
-                BackgroundColor="#2A5769"
+                BackgroundColor="#9b4b9d"
                 Margin="5"
                 WidthRequest="400"
                 Text="Entrar"

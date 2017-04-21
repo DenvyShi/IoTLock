@@ -9,19 +9,19 @@
             <StackLayout VerticalOptions="Center">
                 <Label
                     Text="Nome do Grupo"
-                    TextColor="#2A5769"
+                    TextColor="#9b4b9d"
                     FontSize="Medium"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
                 <Entry 
                     Text="{Binding TextoGrupo}"
-                    TextColor="#2A5769"/>
+                    TextColor="#9b4b9d"/>
                 <Button
                     Margin="0,15,0,0"
                     Text="Cadastrar"
                     TextColor="White"
-                    BackgroundColor="#2A5769"
+                    BackgroundColor="#9b4b9d"
                     Command="{Binding GrupoCommand}"/>
             </StackLayout>
         </ContentPage>
@@ -29,29 +29,29 @@
             <StackLayout Padding="15" VerticalOptions="Center">
                 <Label
                     Text="Nome da Pessoa"
-                    TextColor="#2A5769"
+                    TextColor="#9b4b9d"
                     FontSize="Medium"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
                 <Entry
                     Text="{Binding TextoPessoa}"
-                    TextColor="#2A5769"/>
+                    TextColor="#9b4b9d"/>
                 <Label
                     Text="Grupo"
-                    TextColor="#2A5769"
+                    TextColor="#9b4b9d"
                     FontSize="Medium"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
                 <Picker
-                    TextColor="#2A5769"
+                    TextColor="#9b4b9d"
                     ItemsSource="{Binding Grupos}"
                     SelectedItem="{Binding SelectedGroup}">
                 </Picker>
                 <Button
                     TextColor="White"
-                    BackgroundColor="#2A5769"
+                    BackgroundColor="#9b4b9d"
                     Margin="0,15,0,0"
                     Text="Cadastrar"
                     Command="{Binding CadastrarPessoaCommand}"/>
@@ -61,13 +61,13 @@
             <StackLayout VerticalOptions="Center">
                 <Label
                     Text="Pessoa"
-                    TextColor="#2A5769"
+                    TextColor="#9b4b9d"
                     FontSize="Medium"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
                 <Picker
-                    TextColor="#2A5769"
+                    TextColor="#9b4b9d"
                     ItemsSource="{Binding People}"
                     SelectedItem="{Binding SelectedPerson}"/>
                 <Image Source="{Binding ImageUrl}"
@@ -79,12 +79,12 @@
                 <Button 
                     Text="Cadastrar rosto" 
                     TextColor="White"
-                    BackgroundColor="#2A5769"
+                    BackgroundColor="#9b4b9d"
                     Command="{Binding TakePictureCommand}"/>
                 <Button 
                     Text="Confirmar"
                     TextColor="White"
-                    BackgroundColor="#2A5769"
+                    BackgroundColor="#9b4b9d"
                     Command="{Binding ConfirmedCommand}"/>
             </StackLayout>
         </ContentPage>

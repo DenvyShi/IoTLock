@@ -8,7 +8,7 @@
         <Label
             Margin="10"
             Text="Smart House"
-            TextColor="#2A5769"
+            TextColor="#9b4b9d"
             VerticalOptions="Center"
             HorizontalOptions="Center"
             FontSize="Large"
@@ -35,7 +35,7 @@
             Margin="15"
             Text="Configurações"
             TextColor="White"
-            BackgroundColor="#2A5769"
+            BackgroundColor="#9b4b9d"
             Command="{Binding ConfigCommand}"/>
     </StackLayout>
 </ContentPage>
