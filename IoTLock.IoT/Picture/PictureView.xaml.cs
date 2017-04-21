@@ -1,4 +1,5 @@
 ﻿using IoTLock.IoT.Helpers;
+using Microsoft.AspNet.SignalR.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,6 +53,37 @@ namespace IoTLock.IoT.Picture
             InitializeVideo();
             InitializeGPIO();
 
+            // SignalR connection
+            var hubConnection = new HubConnection("http://iotlock-api.azurewebsites.net");
+            IHubProxy lightingHubProxy = hubConnection.CreateHubProxy("LightingHub");
+            lightingHubProxy.On<string>("toggle", room =>
+            {
+                GpioPinValue value;
+                switch (room)
+                {
+                    case "hallway":
+                        value = hallwayPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        hallwayPin.Write(value);
+                        hallwayPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                    case "kitchen":
+                        value = kitchenPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        kitchenPin.Write(value);
+                        kitchenPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                    case "garden":
+                        value = gardenPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        gardenPin.Write(value);
+                        gardenPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                    case "bedroom":
+                        value = bedroomPin.Read() == GpioPinValue.Low ? GpioPinValue.High : GpioPinValue.Low;
+                        bedroomPin.Write(value);
+                        bedroomPin.SetDriveMode(GpioPinDriveMode.Output);
+                        break;
+                }
+            });
+            hubConnection.Start();
         }
 
         private async void InitializeVideo()
@@ -125,9 +157,15 @@ namespace IoTLock.IoT.Picture
                 statusLabel.Text = "Could not initialize hall pin";
                 return;
             }
+            #endregion
 
-            this.hallPin.Write(GpioPinValue.High);
-            this.hallPin.SetDriveMode(GpioPinDriveMode.Output);
+            #region Hallway Pin
+            this.hallwayPin = gpio.OpenPin(HALLWAY_LED);
+            if (this.hallwayPin == null)
+            {
+                statusLabel.Text = "Could not initialize hallway pin";
+                return;
+            }
             #endregion
 
             #region Kitchen Pin
@@ -137,9 +175,6 @@ namespace IoTLock.IoT.Picture
                 statusLabel.Text = "Could not initialize kitchen pin";
                 return;
             }
-
-            this.kitchenPin.Write(GpioPinValue.High);
-            this.kitchenPin.SetDriveMode(GpioPinDriveMode.Output);
             #endregion
 
             #region Garden Pin
@@ -149,9 +184,6 @@ namespace IoTLock.IoT.Picture
                 statusLabel.Text = "Could not initialize garden pin";
                 return;
             }
-
-            this.gardenPin.Write(GpioPinValue.High);
-            this.gardenPin.SetDriveMode(GpioPinDriveMode.Output);
             #endregion
 
             #region Bedroom Pin
@@ -161,9 +193,6 @@ namespace IoTLock.IoT.Picture
                 statusLabel.Text = "Could not initialize bedroom pin";
                 return;
             }
-
-            this.bedroomPin.Write(GpioPinValue.High);
-            this.bedroomPin.SetDriveMode(GpioPinDriveMode.Output);
             #endregion
 
             #region Button Pin
@@ -266,6 +295,8 @@ namespace IoTLock.IoT.Picture
                     if (authorized)
                     {
                         var person = personsInGabGroup.FirstOrDefault(p => p.PersonId == personId);
+                        hallPin.Write(GpioPinValue.High);
+                        hallPin.SetDriveMode(GpioPinDriveMode.Output);
                         return person.Name;
                     }
                 }
